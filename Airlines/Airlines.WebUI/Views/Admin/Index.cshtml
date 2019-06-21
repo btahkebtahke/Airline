@@ -1,0 +1,64 @@
+﻿@model Airlines.WebUI.Models.AdminViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<div id="modDialog" class="modal fade">
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
+<div class="container-tab">
+    <ul class="accordion-tabs">
+        <li class="tab-head-cont">
+            <a href="#" class="is-active">Stuardesses</a>
+            <section>
+                <p>@{Html.RenderPartial("Stuardesses", Model);}</p>
+            </section>
+        </li>
+        <li class="tab-head-cont">
+            <a href="#">Races</a>
+            <section>
+                <p>
+                <p>@{Html.RenderPartial("Races", Model);}</p>
+                </p>
+            </section>
+        </li>
+        <li class="tab-head-cont">
+            <a href="#">Navigators</a>
+            <section>
+                <p>
+                <p>@{Html.RenderPartial("Navigators", Model);}</p>
+                </p>
+            </section>
+        </li>
+        <li class="tab-head-cont">
+            <a href="#">RadioMen</a>
+            <section>
+                <p>
+                <p>@{Html.RenderPartial("RadioMen", Model);}</p>
+                </p>
+            </section>
+        </li>
+        <li class="tab-head-cont">
+            <a href="#">Pilots</a>
+            <section>
+                <p>
+                <p>@Html.Action("Index", "Pilots", "")</p>
+                </p>
+            </section>
+        </li>
+        <li class="tab-head-cont">
+            <a href="#">Queries</a>
+            <section>
+                <p>
+                <p>@{Html.RenderPartial("Queries", Model);}</p>
+                </p>
+            </section>
+        </li>
+    </ul>
+
+</div>
+    @section Scripts {
+        <script src="~/Scripts/ModalWindow.js"></script>
+        <script src="~/Scripts/TabPages.js"></script>
+    }

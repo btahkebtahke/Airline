@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Airlines.Data.Entities.Query>
+
+@{
+    ViewBag.Title = "Queries";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Queries</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+           Race Team
+        </th>
+        <th>
+           Race
+        </th>
+        <th>
+           Status
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.RaceTeamID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RaceID) <span> (@item.Race.Name)</span>
+    </td>
+
+        @if (item.IsAccepted == null)
+        {
+            <td>
+                Pending
+            </td>
+        }
+        @if (item.IsAccepted == false)
+        {
+            <td>
+                Declined
+            </td>
+        }
+        @if (item.IsAccepted == true)
+        {
+            <td>
+                Accepted
+            </td>
+        }
+
+    <td></td>
+</tr>
+}
+
+</table>

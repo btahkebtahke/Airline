@@ -1,0 +1,49 @@
+﻿@model Airlines.Data.Entities.Query
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Query</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Race.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Race.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RaceTeam.ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RaceTeam.ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsAccepted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsAccepted)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

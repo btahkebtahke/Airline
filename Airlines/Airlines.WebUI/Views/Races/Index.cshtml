@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Airlines.Data.Entities.Race>
+
+@{
+    ViewBag.Title = "Races";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center font-weight-bolder">Races page</h2>
+
+
+@using (Html.BeginForm("Index", "Races", FormMethod.Get))
+{
+    <p class="text-center font-weight-bold">
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
+@using (Html.BeginForm("Filter", "Races", FormMethod.Post, new { @class = "border-primary m-auto text-center" }))
+{
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    <p class="font-weight-bold">Search using parameters(all 3 are required):</p>
+    <div id="divinRace" class="d-inline-flex">
+        <div>
+            Departure from: @Html.TextBox("newDeparture", ViewBag.Departure as string)
+        </div>
+        <div>
+            Destination: @Html.TextBox("newDestination", ViewBag.Destination as string)
+        </div>
+        <div>
+            Choose date: <input type="date" name="newDate" value=" @ViewBag.Date as date " />
+        </div>
+        <div class="text-center">
+            <input type="submit" value="Search" />
+        </div>
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Number", "Index", new { sortOrder = ViewBag.IDSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Departure)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Destinaton)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            Status
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Departure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destinaton)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            @if (item.IsDeparted == true)
+            {
+                <td>
+                    In flight
+                </td>
+            }
+
+            else
+            {
+                <td>
+                    Incoming race
+                </td>
+
+            }
+        </tr>
+    }
+
+</table>

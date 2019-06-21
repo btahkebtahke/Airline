@@ -1,0 +1,31 @@
+﻿@model Airlines.WebUI.Models.AdminViewModel
+
+<div class="modal-content">
+    <div class="modal-header">
+        
+        <h4 class="mr-2">Race Team @Model.RaceTeam.ID</h4>
+        <button class="close" data-dismiss="modal" area-hidden="true">X</button>
+    </div>
+    <div class="modal-body">
+        <dl class="dl-horizontal text-center">
+            <dt>Pilot:</dt>
+            <dd>@Html.DisplayFor(modelItem => Model.RaceTeam.Pilot.FirstName) <span> </span> @Html.DisplayFor(modelItem => Model.RaceTeam.Pilot.LastName)</dd>
+
+            <dt>Navigator:</dt>
+            <dd>@Html.DisplayFor(modelItem => Model.RaceTeam.Navigator.FirstName) <span> </span> @Html.DisplayFor(modelItem => Model.RaceTeam.Navigator.LastName)</dd>
+
+            <dt>RadioMan:</dt>
+            <dd>@Html.DisplayFor(modelItem => Model.RaceTeam.RadioMan.FirstName) <span> </span> @Html.DisplayFor(modelItem => Model.RaceTeam.RadioMan.LastName)</dd>
+            <dt>Stuardesses:</dt>
+            <dd>
+                @if (Model.RaceTeam.Stuardesses != null)
+                {
+                    foreach (var item in Model.RaceTeam.Stuardesses)
+                    {
+                        @Html.DisplayFor(modelItem => item.FirstName)<span> </span>@Html.DisplayFor(modelItem => item.LastName) <br />
+                    }
+                }
+</dl>
+    </div>
+</div>
+<td>

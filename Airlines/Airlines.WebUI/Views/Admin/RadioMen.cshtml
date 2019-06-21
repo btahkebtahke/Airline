@@ -1,0 +1,33 @@
+﻿@model Airlines.WebUI.Models.AdminViewModel
+
+<p class="text-center">
+    @Html.ActionLink("Add a new radioman", "Create", "RadioMen" ,"","")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            First Name
+        </th>
+        <th>
+            Last Name
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.RadioMen)
+    {
+        <tr>
+            <td class="align-middle">
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td class="align-middle">
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "RadioMen", new { id = item.ID } , "")|
+                @Html.ActionLink("Delete", "Delete","RadioMen", new { id = item.ID } , "")
+            </td>
+        </tr>
+    }
+
+</table>

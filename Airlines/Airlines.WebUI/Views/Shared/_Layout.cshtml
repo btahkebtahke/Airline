@@ -1,0 +1,64 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <header class="fixed-top pb-2">
+        <nav class="navbar navbar-expand-lg rounded">
+            <ul class="nav navbar-nav mr-auto">
+                <li class="nav-item h4 text-secondary">@Html.ActionLink("Races", "Index", "Races", "", new { @class = "nav-link text-primary" })  </li>
+                @if (User.IsInRole("admin"))
+                {
+                    <li class="nav-item">@Html.ActionLink("Admin Panel", "Index", "Admin", "", new { @class = "nav-link" })  </li>
+                }
+
+                @if (User.IsInRole("dispatcher"))
+                {
+                    <li class="nav-item">@Html.ActionLink("Dispatcher Panel", "Index", "Dispatcher", "", new { @class = "nav-link" })  </li>
+                    <li class="nav-item">@Html.ActionLink("Queries", "Queries", "Dispatcher", "", new { @class = "nav-link" })  </li>
+                }
+            </ul>
+            @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>*@
+            <ul class="nav navbar-nav ml-auto">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item nav-link text-success">  Hello , @User.Identity.Name ! </li>
+                    <li class="nav-item">@Html.ActionLink("LogOff", "LogOff", "Account", "", new { @class = "nav-link ml-auto" }) </li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Login", "Login", "Account", "", new { @class = "nav-link" })  </li>
+                    <li class="nav-item">@Html.ActionLink("Register", "Register", "Account", "", new { @class = "nav-link" })  </li>
+                }
+            </ul>
+            </nav>
+    </header>
+
+
+    
+
+
+    <section class="container body-content">
+        @RenderBody()
+        <hr/>
+
+    </section>
+    
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+<footer class="col-12">
+    <p>&copy; @DateTime.Now.Year - Denis Balanchuk's Airline Application</p>
+</footer>
+</html>

@@ -1,0 +1,73 @@
+﻿@model Airlines.WebUI.Models.AdminViewModel
+<div class="table-wrap">
+    <div class="text-center">
+        @Html.ActionLink("Add a new race", "Create", "Races", "", "")
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                Race Team
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Departure
+            </th>
+            <th>
+                Destinaton
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Race Status
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Races)
+        {
+            <tr>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.RaceTeam.ID) <br/>
+                    @if (item.RaceTeam != null)
+                    {
+                        @Html.ActionLink("Check roster", "Show", "RaceTeams", new { id = item.RaceTeam.ID }, new { @class = "compItem" })
+                    }
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.Departure)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.Destinaton)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                @if (item.IsDeparted == true)
+                {
+                    <td class="align-middle">
+                        In flight
+                    </td>
+                }
+                else
+                {
+                    <td class="align-middle">
+                        Incoming race
+                    </td>
+                }
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Races", new { id = item.ID }, "") |
+                    @Html.ActionLink("Delete", "Delete", "Races", new { id = item.ID }, "")
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+

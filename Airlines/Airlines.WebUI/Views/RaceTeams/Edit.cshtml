@@ -1,0 +1,72 @@
+﻿@model Airlines.Data.Entities.RaceTeam
+@using System.Collections.Generic
+@using Airlines.Data.OtherActions
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ID)
+<div class="form-horizontal">
+    <h4>RaceTeam</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label class="col-md-4">Choose a pilot for a new team</label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.PilotID, new SelectList(Methods.GetCustomPilots(), "ID", "Name", Model.PilotID), new { @class = "form-control" })           
+            @Html.ValidationMessageFor(model => model.PilotID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-4">Choose a navigator for a new team</label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.NavigatorID, new SelectList(Methods.GetCustomNavigators(), "ID", "Name", Model.NavigatorID), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.NavigatorID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-4">Choose a first Stuardess for a team</label>
+        <div class="col-md-10">
+            @Html.DropDownList("Stuardess1", new SelectList(Methods.GetCustomStuardesses(), "ID", "Name", Methods.GetListOfAddedStuardesses(Model)[0] == null ? "" : Methods.GetListOfAddedStuardesses(Model)[0]), "--Select--", new { @class = "form-control" })
+            @Html.ValidationMessage("Stuardess1", "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-4">Choose a second Stuardess for a team</label>
+        <div class="col-md-10">
+            @*@Html.DropDownList("Stuardess2", null, htmlAttributes: new { @class = "form-control" })*@
+            @Html.DropDownList("Stuardess2", new SelectList(Methods.GetCustomStuardesses(), "ID", "Name", Methods.GetListOfAddedStuardesses(Model)[1] == null ? "" : Methods.GetListOfAddedStuardesses(Model)[1]), "--Select--", new { @class = "form-control" })
+            @Html.ValidationMessage("Stuardess2", "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-4">Choose a Radioman for a team</label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.RadioManID, new SelectList(Methods.GetCustomRadiomen(), "ID", "Name", Model.RadioManID), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.RadioManID, "", new { @class = "text-danger" })
+        </div>
+    </div>   
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
