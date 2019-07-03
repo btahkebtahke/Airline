@@ -13,7 +13,7 @@ namespace Airlines.Data.Entities
         public int? TeamID { get; set; }
         [ForeignKey("TeamID")]
         public RaceTeam Team { get; set; }
-        [Required(ErrorMessage = "Please enter the LastName")]
+        [Required(ErrorMessage = "Please enter the Form color")]
         [RegularExpression(@"^[a-zA-Z ]*$", ErrorMessage = "Please use only alphabet characters")]
         [StringLength(50, ErrorMessage = "Do not use more than 50 charaacters")]
         public string Form { get; set; }

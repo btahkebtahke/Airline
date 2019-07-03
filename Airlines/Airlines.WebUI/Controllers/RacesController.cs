@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Airlines.Data.Entities;
 using Airlines.Data.OtherActions;
 using Airlines.Data.Repository;
+using PagedList;
 
 namespace Airlines.WebUI.Controllers
 {
@@ -25,27 +26,25 @@ namespace Airlines.WebUI.Controllers
         {
             repository = repo;
         }
-
-        private AirlineContext db = new AirlineContext();
-        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        [AllowAnonymous]
+        public ViewResult Index(string sortOrder, int? currentFilter, int? number, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = sortOrder == "name" ? "name_desc" : "name";
             ViewBag.IDSortParm = String.IsNullOrEmpty(sortOrder) ? "ID_desc" : "";
             var races = repository.GetList();
-            if (searchString != null)
+            if (number != null)
             {
                 page = 1;
             }
             else
             {
-                searchString = currentFilter;
+                number = currentFilter;
             }
-
-            ViewBag.CurrentFilter = searchString;
-            if (!String.IsNullOrEmpty(searchString))
+            ViewBag.CurrentFilter = number;
+            if (number != null)
             {
-                races = races.Where(s => s.Name.ToUpper().Contains(searchString.ToUpper()));
+                races = races.Where(r => r.ID == number);
             }
 
             switch (sortOrder)
@@ -64,20 +63,21 @@ namespace Airlines.WebUI.Controllers
                     break;
             }
 
-            //int pageSize = 3;
-            //int pageNumber = (page ?? 1);
-            return View(races);
+            int pageSize = 7;
+            int pageNumber = (page ?? 1);
+
+
+            return View(races.ToPagedList(pageNumber, pageSize));
+            //return View(races);
         }
+        [AllowAnonymous]
         [HttpPost]
-        public ActionResult Filter(string newDeparture, string newDestination, DateTime? newDate)
+        public ActionResult Filter(string newDeparture, string newDestination, DateTime? newDate, int? page)
         {
             var races = repository.GetList();
-
             if (newDate == null || newDeparture == null || newDestination ==null)
             {
-            
                     ModelState.AddModelError("", "Please make sure that all the parameters were used.");
-            
             }            
             if (ModelState.IsValid)
             {
@@ -90,12 +90,13 @@ namespace Airlines.WebUI.Controllers
                 ViewBag.Destination = newDestination;
             }
 
-            return View("Index", races);
+            int pageSize = 7;
+            int pageNumber = (page ?? 1);
+
+
+            return View("Index",races.ToPagedList(pageNumber, pageSize));
         }
-
-
-    
-
+        [Authorize(Roles ="admin")]
         // GET: Races/Create
         public ActionResult Create()
         {
@@ -103,7 +104,7 @@ namespace Airlines.WebUI.Controllers
             return View();
         }
 
-        // POST: Races/Create
+        [Authorize(Roles = "admin")]// POST: Races/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,Departure,Destinaton,Date,IsDeparted,RaceTeamID")] Race race)
@@ -159,7 +160,7 @@ namespace Airlines.WebUI.Controllers
             ViewBag.RaceTeamID = new SelectList(Methods.PopulateRaceTeamDropDownList(), "ID", "ID", race.RaceTeamID);
             return View(race);
         }
-
+        [Authorize(Roles = "admin")]
         // GET: Races/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -174,7 +175,7 @@ namespace Airlines.WebUI.Controllers
             }
             return View(race);
         }
-
+        [Authorize(Roles = "admin")]
         // POST: Races/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -189,7 +190,7 @@ namespace Airlines.WebUI.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                repository.Dispose();
             }
             base.Dispose(disposing);
         }

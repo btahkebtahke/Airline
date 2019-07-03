@@ -11,6 +11,7 @@ using Airlines.Data.Repository;
 
 namespace Airlines.WebUI.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class NavigatorsController : Controller
     {
         

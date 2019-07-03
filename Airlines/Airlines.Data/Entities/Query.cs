@@ -11,10 +11,10 @@ namespace Airlines.Data.Entities
     {
         [ForeignKey("RaceTeamID")]
         public RaceTeam RaceTeam { get; set; }
-        public int RaceTeamID { get; set; }
+        public int? RaceTeamID { get; set; }
         [ForeignKey("RaceID")]
         public Race Race { get; set; }
-        public int RaceID { get; set; }
+        public int? RaceID { get; set; }
         public bool? IsAccepted { get; set; }
     }
 }

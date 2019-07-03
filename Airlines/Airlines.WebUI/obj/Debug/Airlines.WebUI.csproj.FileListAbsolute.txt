@@ -90,3 +90,7 @@ C:\Users\Компьютер\source\repos\Airlines\Airlines.WebUI\bin\Ninject.Web
 C:\Users\Компьютер\source\repos\Airlines\Airlines.WebUI\bin\Ninject.Web.Common.WebHost.xml
 C:\Users\Компьютер\source\repos\Airlines\Airlines.WebUI\bin\System.Web.Providers.dll
 C:\Users\Компьютер\source\repos\Airlines\Airlines.WebUI\bin\System.Web.Providers.xml
+C:\Users\Компьютер\source\repos\Airlines\Airlines.WebUI\bin\PagedList.dll
+C:\Users\Компьютер\source\repos\Airlines\Airlines.WebUI\bin\PagedList.Mvc.dll
+C:\Users\Компьютер\source\repos\Airlines\Airlines.WebUI\bin\PagedList.xml
+C:\Users\Компьютер\source\repos\Airlines\Airlines.WebUI\bin\PagedList.Mvc.xml

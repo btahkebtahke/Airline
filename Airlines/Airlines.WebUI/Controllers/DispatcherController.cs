@@ -10,23 +10,28 @@ using Airlines.WebUI.Models;
 
 namespace Airlines.WebUI.Controllers
 {
+    [Authorize(Roles = "dispatcher")]
     public class DispatcherController : Controller
     {
-        AirlineContext db = new AirlineContext();
-        [Authorize(Roles="dispatcher")]
+        UnitOfWork unitOfWork;
+
+        public DispatcherController()
+        {
+            unitOfWork = new UnitOfWork();
+        }
+
         // GET: Dispatcher
         public ActionResult Index()
         {
             AdminViewModel a = new AdminViewModel
             {
-                Races = db.Races.Include(p => p.RaceTeam).ToList()
+                Races = unitOfWork.Races.GetList()
             };
             return View(a);
         }
-
         public ActionResult Queries()
         {
-            return View(db.Queries.Include(r=>r.Race).Include(r=>r.RaceTeam));
+            return View(unitOfWork.Queries.GetList());
         }
     }
 }

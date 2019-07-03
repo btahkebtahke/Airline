@@ -4,55 +4,59 @@
     ViewBag.Title = "ShowAll";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>ShowAll</h2>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PilotID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NavigatorID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RadioManID)
-        </th>
-             
-        <th>
-        </th>
-
-        <th>
-        </th>
-
-        <th>
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="table-wrap">
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pilot.FirstName) <span> </span> @Html.DisplayFor(modelItem => item.Pilot.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Navigator.FirstName) <span> </span> @Html.DisplayFor(modelItem => item.Navigator.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RadioMan.FirstName) <span> </span> @Html.DisplayFor(modelItem => item.RadioMan.LastName)
-            </td>
-            <td>                
-                @foreach (var item2 in item.Stuardesses)
-                {
-                    @Html.DisplayFor(modelItem => item2.FirstName) <span> </span> @Html.DisplayFor(modelItem => item2.LastName) <br />
-                }
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
-        </tr>
-    }
+            <th>
+                Number
+            </th>
+            <th>
+                Pilot
+            </th>
+            <th>
+                Navigator
+            </th>
+            <th>
+                Radioman
+            </th>
 
-</table>
+            <th>
+                Stuardesses
+            </th>
+
+
+
+            <th>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pilot.FirstName) <span> </span> @Html.DisplayFor(modelItem => item.Pilot.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Navigator.FirstName) <span> </span> @Html.DisplayFor(modelItem => item.Navigator.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RadioMan.FirstName) <span> </span> @Html.DisplayFor(modelItem => item.RadioMan.LastName)
+                </td>
+                <td>
+                    @foreach (var item2 in item.Stuardesses)
+                    {
+                        @Html.DisplayFor(modelItem => item2.FirstName) <span> </span> @Html.DisplayFor(modelItem => item2.LastName) <br />
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "text-secondary my-link" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "text-secondary my-link" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

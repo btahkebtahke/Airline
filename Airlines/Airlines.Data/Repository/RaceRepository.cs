@@ -24,7 +24,7 @@ namespace Airlines.Data.Repository
 
         public Race GetByID(int? id)
         {
-            return context.Races.Find(id);
+            return context.Races.Include(r=>r.RaceTeam).FirstOrDefault(r=>r.ID == id);
         }
 
         public void Create(Race race)

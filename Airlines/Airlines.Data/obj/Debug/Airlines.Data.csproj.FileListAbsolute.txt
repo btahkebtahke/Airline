@@ -32,3 +32,4 @@ C:\Users\Компьютер\source\repos\Airlines\Airlines.Data\obj\Debug\Airlin
 C:\Users\Компьютер\source\repos\Airlines\Airlines.Data\obj\Debug\Airlines.Data.Migrations.ValidationProcess.resources
 C:\Users\Компьютер\source\repos\Airlines\Airlines.Data\obj\Debug\Airlines.Data.Migrations.ValidationProcess1.resources
 C:\Users\Компьютер\source\repos\Airlines\Airlines.Data\obj\Debug\Airlines.Data.Migrations.FinalValidation.resources
+C:\Users\Компьютер\source\repos\Airlines\Airlines.Data\obj\Debug\Airlines.Data.Migrations.Query.resources

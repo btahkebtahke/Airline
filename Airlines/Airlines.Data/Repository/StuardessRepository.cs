@@ -24,7 +24,7 @@ namespace Airlines.Data.Repository
 
         public Stuardess GetByID(int? id)
         {
-            return context.Stuardesses.Find(id);
+            return context.Stuardesses.Include(r => r.Team).FirstOrDefault(r => r.ID == id);
         }
 
         public void Create(Stuardess stuardess)

@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Airlines.Data.Entities.Race>
+﻿@model PagedList.IPagedList<Airlines.Data.Entities.Race>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Races";
@@ -10,17 +12,17 @@
 
 @using (Html.BeginForm("Index", "Races", FormMethod.Get))
 {
-    <p class="text-center font-weight-bold">
-        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+    <p class="text-center font-weight-bold searchcolor">
+        Find by number: @Html.TextBox("number", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" />
     </p>
 }
 
-@using (Html.BeginForm("Filter", "Races", FormMethod.Post, new { @class = "border-primary m-auto text-center" }))
+@using (Html.BeginForm("Filter", "Races", FormMethod.Post, new { @class = "border-primary m-auto text-center paramcolor" }))
 {
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-    <p class="font-weight-bold">Search using parameters(all 3 are required):</p>
-    <div id="divinRace" class="d-inline-flex">
+    <div class="font-weight-bold mb-2">Search using parameters(all 3 are required):</div>
+    <div id="divinRace" class="d-md-inline-flex">
         <div>
             Departure from: @Html.TextBox("newDeparture", ViewBag.Departure as string)
         </div>
@@ -30,68 +32,72 @@
         <div>
             Choose date: <input type="date" name="newDate" value=" @ViewBag.Date as date " />
         </div>
-        <div class="text-center">
+        <div class="text-center mt-md-3 mt-lg-0">
             <input type="submit" value="Search" />
         </div>
     </div>
 }
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Number", "Index", new { sortOrder = ViewBag.IDSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Departure)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Destinaton)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            Status
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="table-wrap">
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Departure)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Destinaton)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            @if (item.IsDeparted == true)
-            {
-                <td>
-                    In flight
-                </td>
-            }
-
-            else
-            {
-                <td>
-                    Incoming race
-                </td>
-
-            }
+            <th>
+                @Html.ActionLink("Number", "Index", new { sortOrder = ViewBag.IDSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            </th>
+            <th>
+                Departure
+            </th>
+            <th>
+                Destination
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Status
+            </th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Departure)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Destinaton)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        @if (item.IsDeparted == true)
+        {
+            <td>
+                In flight
+            </td>
+        }
+
+        else
+        {
+            <td>
+                Incoming race
+            </td>
+
+        }
+    </tr>
+        }
+
+    </table>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>

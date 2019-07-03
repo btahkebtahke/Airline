@@ -127,6 +127,10 @@
     <Compile Include="Migrations\201906202318262_FinalValidation.Designer.cs">
       <DependentUpon>201906202318262_FinalValidation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907021221107_Query.cs" />
+    <Compile Include="Migrations\201907021221107_Query.Designer.cs">
+      <DependentUpon>201907021221107_Query.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OtherActions\Methods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -139,6 +143,7 @@
     <Compile Include="Repository\RaceTeamRepository.cs" />
     <Compile Include="Repository\RadioManRepository.cs" />
     <Compile Include="Repository\StuardessRepository.cs" />
+    <Compile Include="Repository\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -171,6 +176,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906202318262_FinalValidation.resx">
       <DependentUpon>201906202318262_FinalValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907021221107_Query.resx">
+      <DependentUpon>201907021221107_Query.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

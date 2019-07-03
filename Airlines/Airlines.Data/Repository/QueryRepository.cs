@@ -24,28 +24,24 @@ namespace Airlines.Data.Repository
 
         public Query GetByID(int? id)
         {
-            return context.Queries.Find(id);
+            return context.Queries.Include(q => q.Race).Include(q => q.RaceTeam).FirstOrDefault(r => r.ID == id);
         }
 
         public void Create(Query query)
         {
-            query = GetList().FirstOrDefault(r=>r.RaceTeam.ID== query.RaceTeamID);
-
-            Race race = context.Races.Include(r => r.RaceTeam).FirstOrDefault(r => r.ID == query.ID);
-
-            race.RaceTeamID = query.RaceTeamID;
-            context.SaveChanges();
+            context.Queries.Add(query);  
         }
 
         public void Delete(int? queryID)
         {
-            Pilot pilot = context.Pilots.Find(queryID);
-            context.Pilots.Remove(pilot);
+            Query query = context.Queries.Find(queryID);
+            query.IsAccepted = false;
         }
 
         public void Update(Query query)
         {
-            context.Entry(query).State = EntityState.Modified;
+            query.IsAccepted = true;
+            query.Race.RaceTeamID = query.RaceTeamID;
         }
 
         public void Save()

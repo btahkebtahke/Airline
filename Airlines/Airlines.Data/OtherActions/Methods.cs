@@ -16,31 +16,35 @@ namespace Airlines.Data.OtherActions
         public static IEnumerable<RaceTeam> PopulateRaceTeamDropDownList()
         {
             AirlineContext db = new AirlineContext();
-            var departmentsQuery = from d in db.RaceTeams
-                                   orderby d.ID
-                                   select d;
-            return departmentsQuery;
+            
+                var departmentsQuery = from d in db.RaceTeams
+                                       orderby d.ID
+                                       select d;
+                return departmentsQuery;
+            
         }
 
         //Updating of the stuardesses for RaceTeam
         public static void UpdateStuardesses(int? firstStuardess, int? secondStuardess, int raceTeamID)
         {
             AirlineContext db = new AirlineContext();
-            RaceTeam b = db.RaceTeams.Include(i => i.Stuardesses).FirstOrDefault(i => i.ID == raceTeamID);
-            b.Stuardesses.Clear();
-            db.SaveChanges();
-            Stuardess a = db.Stuardesses.FirstOrDefault(i => i.ID == firstStuardess);
-            if (a != null)
-            {
-                b.Stuardesses.Add(a);
+            
+                RaceTeam b = db.RaceTeams.Include(i => i.Stuardesses).FirstOrDefault(i => i.ID == raceTeamID);
+                b.Stuardesses.Clear();
                 db.SaveChanges();
-            }
-            a = db.Stuardesses.FirstOrDefault(i => i.ID == secondStuardess);
-            if (a != null)
-            {
-                b.Stuardesses.Add(a);
-                db.SaveChanges();
-            }
+                Stuardess a = db.Stuardesses.FirstOrDefault(i => i.ID == firstStuardess);
+                if (a != null)
+                {
+                    b.Stuardesses.Add(a);
+                    db.SaveChanges();
+                }
+                a = db.Stuardesses.FirstOrDefault(i => i.ID == secondStuardess);
+                if (a != null)
+                {
+                    b.Stuardesses.Add(a);
+                    db.SaveChanges();
+                }
+            
         }
         //Class for styling of dropdownlists
         public class CustomName
@@ -52,47 +56,49 @@ namespace Airlines.Data.OtherActions
         public static IEnumerable<CustomName> GetCustomPilots()
         {
             AirlineContext db = new AirlineContext();
-            var a = (from s in db.Pilots
-                     select new CustomName
-                     {
-                         Name = s.FirstName + " " + s.LastName,
-                         ID = s.ID
-                     }).ToList();
-            return a;
+            
+                var a = (from s in db.Pilots
+                         select new CustomName
+                         {
+                             Name = s.FirstName + " " + s.LastName,
+                             ID = s.ID
+                         }).ToList();
+                return a;
+            
         }
         public static IEnumerable<CustomName> GetCustomNavigators()
         {
             AirlineContext db = new AirlineContext();
-            var a = (from s in db.Navigators
-                     select new CustomName
-                     {
-                         Name = s.FirstName + " " + s.LastName,
-                         ID = s.ID
-                     }).ToList();
-            return a;
+                var a = (from s in db.Navigators
+                         select new CustomName
+                         {
+                             Name = s.FirstName + " " + s.LastName,
+                             ID = s.ID
+                         }).ToList();
+                return a;
         }
         public static IEnumerable<CustomName> GetCustomRadiomen()
         {
             AirlineContext db = new AirlineContext();
-            var a = (from s in db.RadioMen
-                     select new CustomName
-                     {
-                         Name = s.FirstName + " " + s.LastName,
-                         ID = s.ID
-                     }).ToList();
-            return a;
+                var a = (from s in db.RadioMen
+                         select new CustomName
+                         {
+                             Name = s.FirstName + " " + s.LastName,
+                             ID = s.ID
+                         }).ToList();
+                return a;
         }
 
         public static IEnumerable<CustomName> GetCustomStuardesses()
         {
             AirlineContext db = new AirlineContext();
             var a = (from s in db.Stuardesses
-                     select new CustomName
-                     {
-                         Name = s.FirstName + " " + s.LastName,
-                         ID = s.ID
-                     }).ToList();
-            return a;
+                         select new CustomName
+                         {
+                             Name = s.FirstName + " " + s.LastName,
+                             ID = s.ID
+                         }).ToList();
+                return a;
         }
 
         //Getting the existing stuardesses for Edit method

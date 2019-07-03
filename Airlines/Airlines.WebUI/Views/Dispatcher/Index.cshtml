@@ -2,76 +2,77 @@
 <div id="modDialog" class="modal fade">
     <div id="dialogContent" class="modal-dialog"></div>
 </div>
-
-<table class="table">
-    <tr>
-        <th>
-            Race Team
-        </th>
-        <th>
-            Name
-        </th>
-        <th>
-            Departure
-        </th>
-        <th>
-            Destinaton
-        </th>
-        <th>
-            Date
-        </th>
-        <th>
-            Race Status
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model.Races)
-    {
+<div class="table-wrap">
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RaceTeam.ID) <br />
-                @if (item.RaceTeam != null)
-                {
-                    @Html.ActionLink("Check roster", "Show", "RaceTeams", new { id = item.RaceTeam.ID }, new { @class = "compItem" })
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Departure)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Destinaton)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            @if (item.IsDeparted == true)
-            {
-                <td>
-                    In flight
-                </td>
-            }
-
-            else
-            {
-                <td>
-                    Incoming race
-                </td>
-
-            }
-            <td>
-                @Html.ActionLink("Add/Replace with a new Team", "Create", "RaceTeams", new { id = item.ID }, "") |
-                @Html.ActionLink("Edit Date/Status/Team", "Edit", "Races", new { id = item.ID }, "")|
-                @Html.ActionLink("Send query to admin", "Create", "Queries", new { id = item.ID }, "")
-            </td>
-
+            <th>
+                Race Team
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Departure
+            </th>
+            <th>
+                Destinaton
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Race Status
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
-@section Scripts {
-    <script src="~/Scripts/ModalWindow.js"></script>
-}
+        @foreach (var item in Model.Races)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RaceTeam.ID) <br />
+                    @if (item.RaceTeam != null)
+                    {
+                        @Html.ActionLink("Check roster", "Show", "RaceTeams", new { id = item.RaceTeam.ID }, new { @class = "compItem text-secondary my-link" })
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Departure)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Destinaton)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                @if (item.IsDeparted == true)
+                {
+                    <td>
+                        In flight
+                    </td>
+                }
+
+                else
+                {
+                    <td>
+                        Incoming race
+                    </td>
+
+                }
+                <td>
+                    @Html.ActionLink("Add/Replace with a new Team", "Create", "RaceTeams", new { id = item.ID }, new { @class = "text-secondary my-link" }) |
+                    @Html.ActionLink("Edit Date/Status/Team", "Edit", "Races", new { id = item.ID }, new { @class = "text-secondary my-link" })|
+                    @Html.ActionLink("Send query to admin", "Create", "Queries", new { id = item.ID }, new { @class = "text-secondary my-link" })
+                </td>
+
+            </tr>
+        }
+
+    </table>
+    </div>
+    @section Scripts {
+        <script src="~/Scripts/ModalWindow.js"></script>
+    }

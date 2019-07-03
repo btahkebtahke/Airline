@@ -52,6 +52,16 @@ namespace Airlines.Data.Repository
             }
             context.SaveChanges();
 
+            var q = context.Queries.Where(x => x.RaceTeamID == raceTeamID);
+            if (q != null)
+            {
+                foreach (Query a in q)
+                {
+                    a.RaceTeamID = null;
+                }
+            }
+            context.SaveChanges();
+
             var s = context.Stuardesses.Where(x => x.TeamID == raceTeamID);
             if (s != null)
             {

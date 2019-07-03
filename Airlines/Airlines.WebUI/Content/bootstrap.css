@@ -4,6 +4,30 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+.spaceletter {
+    letter-spacing: 0.5em;
+    color:darkgrey;
+    font-weight:900;
+    margin-bottom:-5px;
+}
+
+.searchcolor {
+    background-color: beige;
+}
+.paramcolor {
+    background-color: lavender;
+}
+
+
+.my-link:hover, .my-link:focus {
+    text-decoration: none;
+}
+
+#supernav {
+    border-top: solid 0.5px;
+    margin-top: -8px;
+    background-image: linear-gradient(to bottom, #777, #333);
+}
 .table-wrap {
     overflow:auto;
 }
@@ -19,7 +43,7 @@ header {
     background-image: linear-gradient(to bottom, #000, #777);
     border: none;
     border-bottom: 1px solid #777;
-    height: 60px;
+    height: 100px;
     padding-top: 10px;
 }
 
@@ -33,7 +57,7 @@ footer {
 
 .container
 {
-    margin-top:80px;
+    margin-top:120px;
     min-height:600px;
     max-height:2200px;
 }

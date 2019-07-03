@@ -5,47 +5,52 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+<h3>Are you sure you want to delete this Raceteam?</h3>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PilotID)
+            Number
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NavigatorID)
+            Pilot
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RadioManID)
+            Navigator
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsAccepted)
+            RadioMan
         </th>
-        <th></th>
+        <th>
+            Sturdesses
+        </th>
     </tr>
-        <tr>
-            <td>
-                @Html.DisplayFor(model => model.PilotID)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.NavigatorID)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.RadioManID)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.IsAccepted)
-            </td>
-
-           
- </table>
-            @using (Html.BeginForm())
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.ID)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Pilot.FirstName) <span> </span> @Html.DisplayFor(model => model.Pilot.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Navigator.FirstName) <span> </span> @Html.DisplayFor(model => model.Navigator.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.RadioMan.FirstName) <span> </span> @Html.DisplayFor(model => model.RadioMan.LastName)
+        </td>
+        <td>
+            @foreach (var item2 in Model.Stuardesses)
             {
-                @Html.AntiForgeryToken()
-
-                <div class="form-actions no-color">
-                    <input type="submit" value="Delete" class="btn btn-default" />
-                </div>
+                @Html.DisplayFor(modelItem => item2.FirstName) <span> </span> @Html.DisplayFor(modelItem => item2.LastName) <br />
             }
-            
+        </td>
+</table>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default" />
+    </div>
+}
+
+

@@ -12,6 +12,7 @@ using Airlines.WebUI.Models;
 
 namespace Airlines.WebUI.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class PilotsController : Controller
     {
         IAirlineRepository<Pilot> repository;

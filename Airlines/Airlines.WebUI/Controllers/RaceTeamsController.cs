@@ -25,12 +25,8 @@ namespace Airlines.WebUI.Controllers
         {
             repository = repo;
         }
-
-        // GET: RaceTeams
-        public ActionResult Index()
-        {
-            return View(repository.GetList());
-        }
+        
+        [Authorize(Roles = "admin, dispatcher")]
         public ActionResult Show(int id)
         {
             AdminViewModel adminViewModel = new AdminViewModel
@@ -39,12 +35,13 @@ namespace Airlines.WebUI.Controllers
             };
             return PartialView(adminViewModel);
         }
-
+        [Authorize(Roles = "admin, dispatcher")]
         public ActionResult ShowAll()
         {
             return View(repository.GetList());
         }
         // GET: RaceTeams/Create
+        [Authorize(Roles = "admin, dispatcher")]
         public ActionResult Create(int id)
         {
             ViewBag.PilotID = new SelectList(GetCustomPilots(), "ID", "Name" , "");
@@ -54,7 +51,7 @@ namespace Airlines.WebUI.Controllers
             ViewBag.RadioManID = new SelectList(GetCustomRadiomen(), "ID", "Name", "");
             return View();
         }
-
+        [Authorize(Roles = "admin, dispatcher")]
         // POST: RaceTeams/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -80,7 +77,7 @@ namespace Airlines.WebUI.Controllers
             }
             return RedirectToAction("Index","Dispatcher","");
         }
-
+        [Authorize(Roles = "admin, dispatcher")]
         // GET: RaceTeams/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -124,7 +121,7 @@ namespace Airlines.WebUI.Controllers
             }
             return View(raceTeam);
         }
-
+        [Authorize(Roles = "admin, dispatcher")]
         // GET: RaceTeams/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -139,7 +136,7 @@ namespace Airlines.WebUI.Controllers
             }
             return View(raceTeam);
         }
-
+        [Authorize(Roles = "admin, dispatcher")]
         // POST: RaceTeams/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -147,7 +144,7 @@ namespace Airlines.WebUI.Controllers
         {
             repository.Delete(id);
             repository.Save();
-            return RedirectToAction("Index");
+            return RedirectToAction("ShowAll");
         }
 
         protected override void Dispose(bool disposing)

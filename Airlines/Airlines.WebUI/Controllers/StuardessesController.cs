@@ -12,6 +12,7 @@ using Airlines.Data.Repository;
 
 namespace Airlines.WebUI.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class StuardessesController : Controller
     {
         private IAirlineRepository<Stuardess> repository;
@@ -48,7 +49,7 @@ namespace Airlines.WebUI.Controllers
             {
                 repository.Create(stuardess);
                 repository.Save();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Admin", "");
             }
 
             ViewBag.TeamID = new SelectList(Methods.PopulateRaceTeamDropDownList(), "ID", "ID", stuardess.TeamID);

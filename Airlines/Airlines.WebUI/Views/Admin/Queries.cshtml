@@ -1,6 +1,6 @@
 ﻿@model Airlines.WebUI.Models.AdminViewModel
 
-
+    <div class="table-wrap">
         <table class="table">
             <tr>
                 <th>
@@ -15,29 +15,30 @@
             @foreach (var item in Model.Queries)
             {
                 <tr>
-            @if (item.IsAccepted == null)
-            {
-                <td class="align-middle">Pending</td>
-            
-                <td class="align-middle">
-                        The query to apply team
-            @if (item.RaceTeam != null)
-            {
-                @Html.ActionLink(item.RaceTeamID.ToString(), "Show", "RaceTeams", new { id = item.RaceTeam.ID }, new { @class = "compItem" })
-            }
-            else
-            { 
-                @item.RaceTeamID
-            }
-                to @item.Race.Name race (@item.Race.Date)
-            </td>
-            <td>
-                @Html.ActionLink("Accept", "Accept", "Queries", new { id = item.ID }, new {@class ="text-success"}) <span> </span>
-                @Html.ActionLink("Decline", "Delete", "Queries", new { id = item.ID }, new {@class ="text-danger"})
-            </td>
-            }
-            
-        </tr>
-        }
+                    @if (item.IsAccepted == null)
+                    {
+                        <td class="align-middle">Pending</td>
 
-</table>
+                        <td class="align-middle">
+                            The query to apply team
+                            @if (item.RaceTeam != null)
+                            {
+                                @Html.ActionLink(item.RaceTeamID.ToString(), "Show", "RaceTeams", new { id = item.RaceTeam.ID }, new { @class = "compItem" })
+                            }
+                            else
+                            {
+                                @item.RaceTeamID
+                            }
+                            to @item.Race.Name race (@item.Race.Date)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Accept", "Update", "Queries", new { id = item.ID }, new { @class = "text-success" }) <span> </span>
+                            @Html.ActionLink("Decline", "Delete", "Queries", new { id = item.ID }, new { @class = "text-danger" })
+                        </td>
+                    }
+
+                </tr>
+            }
+
+        </table>
+        </div>

@@ -4,31 +4,45 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Denis Balanchuk's Airline Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
     <header class="fixed-top pb-2">
-        <nav class="navbar navbar-expand-lg rounded">
-            <ul class="nav navbar-nav mr-auto">
+        <div class="text-center text-light">
+            <h4 class="spaceletter">AIRLINE APP</h4>
+        </div>
+        <nav class="navbar navbar-expand rounded">
+            <ul class="nav navbar-nav mr-auto d-none d-sm-flex">
                 <li class="nav-item h4 text-secondary">@Html.ActionLink("Races", "Index", "Races", "", new { @class = "nav-link text-primary" })  </li>
+                <br />
+                @if (User.IsInRole("admin") || User.IsInRole("dispatcher"))
+                {
+                    <li class="nav-item">@Html.ActionLink("Raceteams", "Showall", "RaceTeams", "", new { @class = "nav-link" })  </li>
+                }
                 @if (User.IsInRole("admin"))
                 {
-                    <li class="nav-item">@Html.ActionLink("Admin Panel", "Index", "Admin", "", new { @class = "nav-link" })  </li>
+                    <li class="nav-item">@Html.ActionLink("Admin", "Index", "Admin", "", new { @class = "nav-link" })  </li>
                 }
-
                 @if (User.IsInRole("dispatcher"))
                 {
-                    <li class="nav-item">@Html.ActionLink("Dispatcher Panel", "Index", "Dispatcher", "", new { @class = "nav-link" })  </li>
+                    <li class="nav-item">@Html.ActionLink("Dispatcher", "Index", "Dispatcher", "", new { @class = "nav-link" })  </li>
                     <li class="nav-item">@Html.ActionLink("Queries", "Queries", "Dispatcher", "", new { @class = "nav-link" })  </li>
                 }
             </ul>
-            @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+
+
+
+            <button class="navbar-toggler navbar-light border-dark d-block d-sm-none ml-3" type="button" data-toggle="collapse" data-target="#supernav" aria-controls="supernav"
                     aria-expanded="false" aria-label="Toggle navigation">
+                <span class="sr-only">Toggle navigation</span>
                 <span class="navbar-toggler-icon"></span>
-            </button>*@
+            </button> <br />
+
+
+
             <ul class="nav navbar-nav ml-auto">
                 @if (User.Identity.IsAuthenticated)
                 {
@@ -41,13 +55,28 @@
                     <li class="nav-item">@Html.ActionLink("Register", "Register", "Account", "", new { @class = "nav-link" })  </li>
                 }
             </ul>
-            </nav>
+
+
+        </nav>
+        <nav id="supernav" class="collapse mr-auto d-sm-none d-lg-none navbar-light text-center w-100">
+            <a class="nav-item text-secondary">@Html.ActionLink("Races", "Index", "Races", "", new { @class = "nav-link" })  </a>
+            @if (User.IsInRole("admin") || User.IsInRole("dispatcher"))
+            {
+                <a class="nav-item">@Html.ActionLink("Raceteams", "Showall", "RaceTeams", "", new { @class = "nav-link" })  </a>
+            }
+            @if (User.IsInRole("admin"))
+            {
+                <a class="nav-item">@Html.ActionLink("Admin Panel", "Index", "Admin", "", new { @class = "nav-link" })  </a>
+            }
+
+            @if (User.IsInRole("dispatcher"))
+            {
+                <a>@Html.ActionLink("Dispatcher Panel", "Index", "Dispatcher", "", new { @class = "nav-link" })  </a>
+                <a class="nav-item">@Html.ActionLink("Queries", "Queries", "Dispatcher", "", new { @class = "nav-link" })  </a>
+            }
+        </nav>
+
     </header>
-
-
-    
-
-
     <section class="container body-content">
         @RenderBody()
         <hr/>
